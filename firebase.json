@@ -1,0 +1,13 @@
+{
+  "hosting": {
+    "site": "algamoney-app",
+    "public": "dist/algamoney-ui",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
