@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { ErrorHandlerService } from "../error-handler.service";
 
 import { AuthService } from "./../../seguranca/auth.service";
+import { ConfirmationService, MessageService } from "primeng/api";
 
 @Component({
   selector: "app-navbar",
@@ -16,7 +17,8 @@ export class NavbarComponent implements OnInit {
   constructor(
     public auth: AuthService,
     private errorHandler: ErrorHandlerService,
-    private router: Router
+    private router: Router,
+    private confirmationService: ConfirmationService
   ) {}
 
   ngOnInit() {
@@ -28,7 +30,16 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-    this.auth.logout();
+    this.exibindoMenu = false;
+    this.confirmationService.confirm({
+      message: "Tem certeza que deseja sair?",
+      icon: "pi pi-exclamation-triangle",
+      acceptLabel: "Sim",
+      rejectLabel: "Cancelar",
+      accept: () => {
+        this.auth.logout();
+      },
+    });
   }
 
   // Método para fechar o menu quando um clique é detectado fora dele
